@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="en">
+	<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uses of LLMs in Social Sciences — Daniel Valdenegro</title>
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <style>
+    /* Minimal, austere styling tuned for Oxford seminar */
+    :root{
+      --accent: #0a4d8c; /* restrained Oxford-blue accent */
+      --max-width: 920px;
+    }
+
+    /* Increase default font-size for readability in seminar rooms */
+    html { font-size: 18px; }
+
+    /* Big, centred title slide */
+    .reveal .slides section.title-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .title-block {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .institution {
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 0.6rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      opacity: 0.95;
+    }
+
+    h1 {
+      margin: 0.25rem 0 0.5rem 0;
+      font-weight: 600;
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 2.25rem;
+      line-height: 1.05;
+      color: #111;
+    }
+
+    .author {
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: #222;
+    }
+
+    .meta {
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    /* footer small */
+    .slide-footer {
+      position: absolute;
+      bottom: 18px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #666;
+      letter-spacing: 0.02em;
+    }
+
+    /* Keep content narrow on subsequent slides */
+    .reveal .slides section .content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .reveal .katex-display {
+  font-size: 1.3rem;
+}
+
+  </style>
+  
+	</head>
+	<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title slide -->
+      <section class="title-slide">
+        <div class="title-block">
+          <div class="institution">Department of Sociology — University of Oxford</div>
+
+          <h1>
+            Uses of LLMs in Social Sciences:<br>
+            Benefits and Risk
+          </h1>
+
+          <div class="author">Daniel Valdenegro</div>
+
+          <div class="meta">Sociology Weekly Seminar — 16 February 2026, 12.45pm</div>
+        </div>
+
+        <div class="slide-footer">Department of Sociology • Seminar Series</div>
+      </section>
+	  <section>
+	  <section>
+  		<div class="content" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+    		<h2 style="text-align: center; font-weight: 500;">
+      		A visual motivation
+    		</h2>
+  		</div>
+	  </section>
+	  <section>
+  <div class="content" style="text-align: center;">
+
+    <!-- Image -->
+    <img 
+      src="images/img1.png" 
+      style="max-width: 85%; height: auto; display: block; margin: 0 auto;"
+    >
+
+    <!-- Caption / legend -->
+    <p style="
+      font-size: 0.8rem; 
+      color: #555; 
+      margin-top: 1rem; 
+      max-width: 80%; 
+      margin-left: auto; 
+      margin-right: auto;
+    ">
+      Figure 1. Taken from: Dong et al., Image Super-Resolution Using Deep Convolutional Networks (SRCNN), IEEE TPAMI.
+    </p>
+
+  </div>
+</section>
+	  <section>
+  <div class="content" style="text-align: center;">
+
+    <!-- Image -->
+    <img 
+      src="images/img2.png" 
+      style="max-width: 85%; height: auto; display: block; margin: 0 auto;"
+    >
+
+    <!-- Caption / legend -->
+    <p style="
+      font-size: 0.8rem; 
+      color: #555; 
+      margin-top: 1rem; 
+      max-width: 80%; 
+      margin-left: auto; 
+      margin-right: auto;
+    ">
+      Figure 2. Example of a more extreme use of upscaling.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <!-- Image -->
+    <img 
+      src="images/img3.png" 
+      style="max-width: 85%; height: auto; display: block; margin: 0 auto;"
+    >
+
+    <!-- Caption / legend -->
+    <p style="
+      font-size: 0.8rem; 
+      color: #555; 
+      margin-top: 1rem; 
+      max-width: 80%; 
+      margin-left: auto; 
+      margin-right: auto;
+    ">
+      Figure 3. Example of when upsacling goes wrong.
+    </p>
+
+  </div>
+</section>
+	  <section>
+  		<div class="content" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+    		<h2 style="text-align: center; font-weight: 500;">
+      		What happened here?
+    		</h2>
+  		</div>
+</section>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem; font-weight: 500;">Structure of the talk</h2>
+
+    <ul style="list-style-type: none; padding-left: 0; font-size: 2rem; line-height: 1.8;">
+      <li>1. Information theory basics</li>
+      <li>2. Implications for current applications of LLMs</li>
+      <li>3. Suggestions for future applications of LLMs</li>
+    </ul>
+  </div>
+</section>
+<section>
+
+  <section>
+    <div class="content">
+
+      <h2 style="margin-bottom: 2rem;">The communication problem</h2>
+
+      <ul style="list-style-type: none; padding-left: 0; font-size: 1.7rem; line-height: 1.8;">
+        <li class="fragment">A message originates somewhere</li>
+        <li class="fragment">It is encoded into a signal</li>
+        <li class="fragment">It passes through a channel</li>
+        <li class="fragment">It is decoded at the other end</li>
+        <li class="fragment">Noise may interfere</li>
+      </ul>
+
+    </div>
+  </section>
+
+
+  <section>
+    <div class="content">
+
+      <h2 style="margin-bottom: 2rem;">Shannon’s move (1948)</h2>
+
+      <ul style="list-style-type: none; padding-left: 0; font-size: 1.7rem; line-height: 1.8;">
+        <li class="fragment">Problem: reliable signal transmission</li>
+        <li class="fragment">Focus: probability distributions over symbols</li>
+        <li class="fragment">Information = reduction of uncertainty</li>
+        <li class="fragment">Meaning deliberately bracketed</li>
+      </ul>
+
+    </div>
+  </section>
+
+
+  <section>
+    <div class="content">
+
+      <h2 style="margin-bottom: 2rem;">Self-information</h2>
+
+      <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+        For an event $x$ with probability $P(x)$:
+      </p>
+
+      $$
+      I(x) = - \log P(x)
+      $$
+
+      <p class="fragment" style="margin-top: 2rem; font-size: 1.1rem;">
+        Rare events carry more information.
+      </p>
+
+    </div>
+  </section>
+
+
+  <section>
+    <div class="content">
+
+      <h2 style="margin-bottom: 2rem;">Entropy</h2>
+
+      <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+        The average information produced by a random variable $X$:
+      </p>
+
+      $$
+      H(X) = - \sum_{x} P(x)\,\log P(x)
+      $$
+
+      <p class="fragment" style="margin-top: 2rem; font-size: 1.1rem;">
+        Measures uncertainty in a distribution.
+      </p>
+
+    </div>
+  </section>
+
+
+  <section>
+    <div class="content">
+
+      <h2 style="margin-bottom: 2rem;">Conditional entropy</h2>
+
+      <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+        The uncertainty that remains about $X$ given $Y$:
+      </p>
+
+      $$
+      H(X \mid Y)
+      =
+      - \sum_{x,y} P(x,y)\,\log P(x \mid y)
+      $$
+
+      <p class="fragment" style="margin-top: 2rem; font-size: 1.1rem;">
+        If $H(X \mid Y)$ is small, knowing $Y$ tells us a lot about $X$.
+      </p>
+
+    </div>
+  </section>
+
+
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 1.5rem;">Mutual information</h2>
+
+    <p style="margin-bottom: 1rem;">The reduction in uncertainty:</p>
+
+    <div style="font-size: 1.25rem; margin-bottom: 0.6rem;">
+      $$
+      \color{#0a4d8c}{I(X;Y)} \;=\; H(X) - H(X\mid Y)
+      $$
+    </div>
+
+    <div style="font-size: 1.25rem;">
+      $$
+      = \sum_{x,y} P(x,y)\,\log\!\frac{P(x,y)}{P(x)P(y)}
+      $$
+    </div>
+
+    <p class="fragment" style="margin-top: 1.2rem; font-size: 1.02rem; color: #444; border-top: 1px solid #eee; padding-top: 0.8rem;">
+      <span style="color: #0a4d8c; font-weight: 600;">Meaning:</span>
+      Mutual information quantifies how much knowledge of <em>Y</em> reduces uncertainty about <em>X</em> — the information they share.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">A simple structure</h2>
+
+    <div style="font-size: 1.6rem; margin-top: 2rem;">
+      $$
+      X \;\longrightarrow\; Y \;\longrightarrow\; Z
+      $$
+    </div>
+
+    <p class="fragment" style="margin-top: 2rem; font-size: 1.05rem; color: #444;">
+      Each stage depends only on the previous one.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Data Processing Inequality</h2>
+
+    <div style="font-size: 1.4rem;">
+      $$
+      \color{#0a4d8c}{I(X;Z)} \;\le\; I(X;Y)
+      $$
+    </div>
+
+    <p class="fragment" style="margin-top: 2rem; font-size: 1.05rem; color: #444;">
+      Processing cannot increase information about the origin.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 2rem;">The constraint</h2>
+
+    <p style="font-size: 1.4rem; max-width: 850px; margin: 0 auto;">
+      Downstream transformations can preserve information<br>
+      or destroy it —
+      <br><br>
+      <span style="color: #0a4d8c; font-weight: 600;">
+        but they cannot create new information about the source.
+      </span>
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Communication as a Markov chain</h2>
+
+    <div style="font-size: 1.35rem; margin-bottom: 1.5rem;">
+      $$
+      M_{\text{mind}}
+      \;\longrightarrow\;
+      M_{\text{text}}
+      \;\longrightarrow\;
+      \text{Processed text}
+      $$
+    </div>
+
+    <div style="font-size: 1.25rem; margin-top: 1.5rem;">
+      $$
+      \color{#0a4d8c}{
+      I\!\left(M_{\text{mind}};\,\text{Processed text}\right)
+      \;\le\;
+      I\!\left(M_{\text{mind}};\,M_{\text{text}}\right)
+      }
+      $$
+    </div>
+
+    <p class="fragment" style="margin-top: 2rem; font-size: 1.05rem; color: #444;">
+      Any system operating only on text is downstream of the original mental state.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">A more granular chain</h2>
+
+    <div style="font-size: 1.15rem; margin-bottom: 1.8rem;">
+      $$
+      M_{\text{mind}}
+      \;\longrightarrow\;
+      M_{\text{speech}}
+      \;\longrightarrow\;
+      M_{\text{text}}
+      \;\longrightarrow\;
+      E
+      \;\longrightarrow\;
+      H
+      $$
+      $$
+      \text{(mental state)}
+      \qquad\qquad
+      \text{(embedding)}
+      \qquad
+      \text{(higher representation)}
+      $$
+    </div>
+
+    <div style="font-size: 1.15rem;">
+      $$
+      I(M_{\text{mind}}; H)
+      \;\le\;
+      I(M_{\text{mind}}; E)
+      \;\le\;
+      I(M_{\text{mind}}; M_{\text{text}})
+      \;\le\;
+      I(M_{\text{mind}}; M_{\text{speech}})
+      $$
+    </div>
+
+    <p class="fragment" style="margin-top: 2rem; font-size: 1.05rem; color: #444;">
+      Each stage is downstream. Mutual information can only decrease.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Inference as decoding</h2>
+
+    <p style="font-size: 1.15rem; margin-bottom: 1.8rem;">
+      An unknown object $f$ generates observable data.
+    </p>
+
+    <div style="font-size: 1.2rem; margin-bottom: 1.8rem;">
+      $$
+      f
+      \;\longrightarrow\;
+      f(X_1), \dots, f(X_n)
+      \;\longrightarrow\;
+      Y_1, \dots, Y_n
+      $$
+    </div>
+
+    <p class="fragment" style="font-size: 1.05rem; color: #444;">
+      The observations $Y_i$ are noisy encodings of the underlying signal.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Information in the data</h2>
+
+    <div style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+      $$
+      I\!\left(f;\, Y_1,\dots,Y_n\right)
+      \;\le\;
+      I\!\left(f;\, f(X_1),\dots,f(X_n)\right)
+      $$
+    </div>
+
+    <p class="fragment" style="margin-top: 1.8rem; font-size: 1.05rem; color: #444;">
+      Estimation cannot extract more information about $f$ than the data contain.
+    </p>
+
+    <p class="fragment" style="margin-top: 0.8rem; font-size: 1.05rem; color: #444;">
+      Downstream procedures cannot exceed this bound.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Distributional methods</h2>
+
+    <p style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      Semantic structure is inferred from patterns of usage.
+    </p>
+
+    <ul style="list-style-type: none; padding-left: 0; font-size: 1.1rem; line-height: 1.8;">
+      <li class="fragment">Word embeddings</li>
+      <li class="fragment">Contextual embeddings</li>
+      <li class="fragment">Attention mechanisms</li>
+      <li class="fragment">Transformer architectures</li>
+    </ul>
+
+    <p class="fragment" style="margin-top: 1.5rem; font-size: 1.05rem; color: #444;">
+      All learn from statistical regularities in text.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Text-only learning</h2>
+
+    <div style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+      $$
+      M_{\text{mind}}
+      \;\longrightarrow\;
+      M_{\text{text}}
+      \;\longrightarrow\;
+      \text{Distributional model}
+      $$
+    </div>
+
+    <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+      $$
+      I\!\left(M_{\text{mind}};\,\text{Model}\right)
+      \;\le\;
+      I\!\left(M_{\text{mind}};\,M_{\text{text}}\right)
+      $$
+    </div>
+
+    <p class="fragment" style="margin-top: 1.5rem; font-size: 1.05rem; color: #444;">
+      The model cannot recover information not preserved in text.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 2rem;">Asymptotic convergence — but blind</h2>
+
+    <p style="font-size: 1.2rem; max-width: 850px; margin: 0 auto 1.5rem auto;">
+      Distributional systems optimise with respect to
+      statistical structure in text.
+    </p>
+
+    <p class="fragment" style="font-size: 1.15rem; max-width: 850px; margin: 0 auto 1.5rem auto;">
+      They receive no semantic error signal from the original mental state.
+    </p>
+
+    <p class="fragment" style="font-size: 1.25rem; max-width: 850px; margin: 0 auto;">
+      <span style="color: #0a4d8c; font-weight: 600;">
+        Improvement is possible — but only within the information already preserved in text.
+      </span>
+    </p>
+
+  </div>
+</section>
+</section>
+<section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 1.5rem;">
+      Implications for current applications
+    </h2>
+
+    <p style="font-size: 1.3rem; margin-top: 1rem;">
+      Where the limits become binding
+    </p>
+
+    <p class="fragment" style="margin-top: 2rem; font-size: 1.05rem; color: #444; max-width: 850px; margin-left: auto; margin-right: auto;">
+      The constraints imposed by information theory are not abstract —
+      they apply directly to contemporary uses of LLMs in the social sciences.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Synthetic respondents</h2>
+
+    <p style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      Proposal: treat LLM outputs as observations in social experiments.
+    </p>
+
+    <ul style="list-style-type: none; padding-left: 0; font-size: 1.1rem; line-height: 1.8;">
+      <li class="fragment">Full replacement of human subjects</li>
+      <li class="fragment">Augment human samples</li>
+      <li class="fragment">Prediction-powered inference (PPI)</li>
+    </ul>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">What the i.i.d. assumption grants</h2>
+
+    <div style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+      $$
+      P\!\left(\bigcap_{j=1}^k A_j\right)
+      =
+      \prod_{j=1}^k P(A_j)
+      $$
+    </div>
+
+    <p class="fragment" style="font-size: 1.05rem; margin-bottom: 0.8rem;">
+      Independence → each observation carries non-redundant information.
+    </p>
+
+    <p class="fragment" style="font-size: 1.05rem;">
+      Identical distribution → repeated draws from the same process.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 2rem;">The epistemic question</h2>
+
+    <p style="font-size: 1.25rem; max-width: 850px; margin: 0 auto;">
+      Are we epistemically licensed to treat LLM outputs
+      as i.i.d. samples of human behaviour?
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Dependence induced by shared parameters</h2>
+
+    <div style="font-size: 1.05rem; margin-bottom: 1.5rem;">
+      $$
+      P(Y_{1:J} \mid \theta, p_{1:J})
+      \neq
+      \prod_{j=1}^J P(Y_j \mid \theta_j)
+      $$
+      $$
+      \theta_j = L(\theta, D_j)
+      $$
+    </div>
+
+    <p class="fragment" style="font-size: 1.05rem; color: #444;">
+      Generations are draws from one trained model —
+      not independent new experiments.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">What identical distribution would require</h2>
+
+    <p style="font-size: 1.15rem; margin-bottom: 1.8rem;">
+      To treat LLM outputs and human responses as identically distributed
+      is to assume:
+    </p>
+
+    <div style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      $$
+      P_{\text{LLM}} = P_{\text{human}}
+      $$
+    </div>
+
+    <p class="fragment" style="font-size: 1.1rem; margin-bottom: 1rem;">
+      That the model’s representational space exhausts
+      the underlying social phenomenon.
+    </p>
+
+    <div class="fragment" style="font-size: 1.1rem;">
+      $$
+      \text{supp}(P_{\text{LLM}})
+      \;\supseteq\;
+      \text{supp}(P_{\text{human}})
+      $$
+    </div>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Linking back to the Data Processing Inequality</h2>
+
+    <div style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      $$
+      M_{\text{mind}}
+      \;\longrightarrow\;
+      M_{\text{text}}
+      \;\longrightarrow\;
+      \text{LLM}
+      $$
+    </div>
+
+    <div style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      $$
+      I(M_{\text{mind}};\,\text{LLM})
+      \;\le\;
+      I(M_{\text{mind}};\,M_{\text{text}})
+      $$
+    </div>
+
+    <p class="fragment" style="font-size: 1.1rem; margin-bottom: 1rem;">
+      For interchangeability to hold, this inequality must be tight.
+    </p>
+
+    <p class="fragment" style="font-size: 1.1rem; margin-bottom: 1rem;">
+      Text would need to encode the entirety of the relevant human phenomenon.
+    </p>
+
+    <p class="fragment" style="font-size: 1.2rem; color: #0a4d8c; font-weight: 600;">
+      That is an extraordinary assumption.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 2rem;">Recapitulation</h2>
+
+    <p style="font-size: 1.25rem; max-width: 850px; margin: 0 auto 1.5rem auto;">
+      If LLM outputs are treated as interchangeable with human observations,
+    </p>
+
+    <p class="fragment" style="font-size: 1.25rem; max-width: 850px; margin: 0 auto 1.5rem auto;">
+      then text must exhaust the human phenomenon,
+    </p>
+
+    <p class="fragment" style="font-size: 1.25rem; max-width: 850px; margin: 0 auto;">
+      and no relevant information may be lost in its encoding.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Tabular data augmentation</h2>
+
+    <p style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      Proposal: transform complex administrative log data into text,
+      and use LLMs to analyse or predict from it.
+    </p>
+
+    <ul style="list-style-type: none; padding-left: 0; font-size: 1.1rem; line-height: 1.8;">
+      <li class="fragment">Combine multi-domain life-course data</li>
+      <li class="fragment">Write individual “books” in plain text</li>
+      <li class="fragment">Use LLMs as downstream learners</li>
+    </ul>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Another downstream chain</h2>
+
+    <div style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+      $$
+      D_{\text{log}}
+      \;\longrightarrow\;
+      T_{\text{text}}
+      \;\longrightarrow\;
+      \text{LLM}
+      $$
+    </div>
+
+    <div style="font-size: 1.15rem; margin-bottom: 1rem;">
+      $$
+      I(D_{\text{log}};\,\text{LLM})
+      \;\le\;
+      I(D_{\text{log}};\,T_{\text{text}})
+      $$
+    </div>
+
+    <p class="fragment" style="margin-top: 1.5rem; font-size: 1.05rem; color: #444;">
+      Any textualisation of log data is an encoding.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 2rem;">Encoding is compression</h2>
+
+    <p style="font-size: 1.2rem; max-width: 850px; margin: 0 auto 1.5rem auto;">
+      Complex log data contain structured, multi-level, time-indexed information.
+    </p>
+
+    <p class="fragment" style="font-size: 1.2rem; max-width: 850px; margin: 0 auto 1.5rem auto;">
+      Writing them as text necessarily imposes
+      a representational choice.
+    </p>
+
+    <p class="fragment" style="font-size: 1.25rem; color: #0a4d8c; font-weight: 600; max-width: 850px; margin: 0 auto;">
+      What is not preserved in that encoding cannot be recovered downstream.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">What would have to be true</h2>
+
+    <p style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      For the textual representation to be fully informative,
+    </p>
+
+    <div style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      $$
+      I(D_{\text{log}};\,T_{\text{text}})
+      =
+      H(D_{\text{log}})
+      $$
+    </div>
+
+    <p class="fragment" style="font-size: 1.1rem; margin-bottom: 1rem;">
+      The encoding would need to preserve all relevant structure
+      in the original log data.
+    </p>
+
+    <p class="fragment" style="font-size: 1.1rem; margin-bottom: 1rem;">
+      But encoding involves choices:
+      language, ordering, filtering, stylistic framing.
+    </p>
+
+    <p class="fragment" style="font-size: 1.2rem; color: #0a4d8c; font-weight: 600;">
+      These choices determine what information survives.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 2rem;">Two applications, one constraint</h2>
+
+    <p style="font-size: 1.2rem; max-width: 900px; margin: 0 auto 1.5rem auto;">
+      Synthetic respondents require assuming
+      distributional equivalence with human behaviour.
+    </p>
+
+    <p class="fragment" style="font-size: 1.2rem; max-width: 900px; margin: 0 auto 1.5rem auto;">
+      Textual augmentation requires assuming
+      lossless encoding of complex log data.
+    </p>
+
+    <p class="fragment" style="font-size: 1.25rem; color: #0a4d8c; font-weight: 600; max-width: 900px; margin: 0 auto;">
+      In both cases, the Data Processing Inequality places a hard upper bound
+      on what can be inferred.
+    </p>
+
+  </div>
+</section>
+</section>
+<section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 1.5rem;">
+      Suggestions for future applications
+    </h2>
+
+    <p style="font-size: 1.3rem; margin-top: 1rem;">
+      Working within the constraint
+    </p>
+
+    <p class="fragment" style="margin-top: 2rem; font-size: 1.05rem; color: #444; max-width: 850px; margin-left: auto; margin-right: auto;">
+      If the limits are structural, the question is not whether to use LLMs,
+      but how to use them without overstepping their epistemic licence.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">LLMs as secondary compression</h2>
+
+    <p style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      Use LLMs to operate on already collected data —
+      not as substitutes for primary observation.
+    </p>
+
+    <ul style="list-style-type: none; padding-left: 0; font-size: 1.1rem; line-height: 1.8;">
+      <li class="fragment">Summarisation</li>
+      <li class="fragment">Coding and categorisation</li>
+      <li class="fragment">Measurement extraction</li>
+      <li class="fragment">Noise reduction within fixed estimands</li>
+    </ul>
+
+    <p class="fragment" style="margin-top: 1.5rem; font-size: 1.05rem; color: #444;">
+      Efficiency gains are possible without ontological overreach.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Information-aware pipelines</h2>
+
+    <div style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+      $$
+      \text{Primary data}
+      \;\longrightarrow\;
+      \text{Structured representation}
+      \;\longrightarrow\;
+      \text{LLM}
+      $$
+    </div>
+
+    <p class="fragment" style="font-size: 1.1rem; margin-bottom: 1rem;">
+      Treat each transformation as an encoding step.
+    </p>
+
+    <p class="fragment" style="font-size: 1.1rem;">
+      Make explicit what information is preserved
+      and what is discarded.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content">
+
+    <h2 style="margin-bottom: 2rem;">Modelling information loss</h2>
+
+    <p style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      Instead of assuming lossless encoding,
+      quantify the loss.
+    </p>
+
+    <div class="fragment" style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+      $$
+      \Delta = I(X;Y_{\text{before}})
+      -
+      I(X;Y_{\text{after}})
+      $$
+    </div>
+
+    <p class="fragment" style="font-size: 1.1rem;">
+      Treat downstream outputs as
+      compressions of existing information —
+      not new evidence.
+    </p>
+
+  </div>
+</section>
+<section>
+  <div class="content" style="text-align: center;">
+
+    <h2 style="margin-bottom: 2rem;">Conclusion</h2>
+
+    <p style="font-size: 1.4rem; max-width: 900px; margin: 0 auto;">
+      Large language models can reorganise and compress information —
+      but they cannot create information that was never there.
+    </p>
+
+  </div>
+</section>
+
+</section>
+
+</div>
+</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				showHiddenSlides: true,
+
+				slideNumber: 'c/t',
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+		</script>
+    
+		
+	</body>
+</html>
